@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+	xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+	typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath"
+	targetNamespace="http://www.mysite.org/test">
+	<process id="simple-test-process" name="simple-test-process">
+		<startEvent id="startEvent" name="startEvent"></startEvent>
+		<sequenceFlow id="sequenceFlow1" targetRef="initTask" sourceRef="startEvent" />
+		<serviceTask id="initTask" name="initTask" activiti:expression="${myService.init(photos)}"></serviceTask>
+		<sequenceFlow targetRef="taskA" sourceRef="initTask"></sequenceFlow>
+		<userTask id="taskA" name="taskA" activiti:assignee="Hello World" ></userTask>
+		<sequenceFlow id="sequenceFlow2" targetRef="taskB" sourceRef="taskA"></sequenceFlow>
+		<userTask id="taskB" name="taskB" activiti:assignee="$INITIATOR"></userTask>
+		<sequenceFlow id="sequenceFlow3" targetRef="endEvent" sourceRef="taskB" />
+		<endEvent id="endEvent" name="endEvent"></endEvent>
+	</process>
+</definitions>
